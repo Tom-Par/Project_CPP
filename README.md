@@ -9,7 +9,7 @@ Whole equipment and room layout.
 - [Usage](#usage)
 - [License](#license)
   
-## Schedule
+## Schedule (Overall working plan)
 - Create desing and create database that will be used in our Application
 - Start setting first steps and set fundamentals
 - Connect database with app

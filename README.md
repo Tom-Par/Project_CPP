@@ -3,7 +3,7 @@ A user-friendly application providing whole customisable system with staf, patie
 
 Whole equipment and room layout.
 ## Table of Contents
-- [Schedule](#schedule)
+- [Schedule](#schedule-overall-working-plan)
 - [Used Technologies](#used-technologies)
 - [Installation](#installation)
 - [Usage](#usage)

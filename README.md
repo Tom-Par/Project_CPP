@@ -3,12 +3,12 @@ A user-friendly application providing whole customisable system with staf, patie
 
 Whole equipment and room layout.
 ## Table of Contents
-- [Schedule](#schedule (overall working plan))
+- [Schedule](#schedule)
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
   
-## Schedule (Overall Working Plan)
+## Schedule
 - Create desing and create database that will be used in our Application
 - Start setting first steps and set fundamentals
 - Connect database with app

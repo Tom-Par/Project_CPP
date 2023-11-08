@@ -19,7 +19,7 @@ struct Staff {
 // Funkcja do dodawania pacjentów
 void addPatient(std::vector<Patient>& patients) {
     Patient patient;
-    std::cout << "Podaj imie pacjenta: ";
+    std::cout << "\nPodaj imie pacjenta: ";
     std::cin >> patient.name;
     std::cout << "Podaj wiek pacjenta: ";
     std::cin >> patient.age;
@@ -32,7 +32,7 @@ void addPatient(std::vector<Patient>& patients) {
 // Funkcja do dodawania personelu szpitala
 void addStaffMember(std::vector<Staff>& staff) {
     Staff staffMember;
-    std::cout << "Podaj imie pracownika: ";
+    std::cout << "\nPodaj imie pracownika: ";
     std::cin >> staffMember.name;
     std::cout << "Podaj stanowisko pracownika: ";
     std::cin >> staffMember.position;
@@ -52,7 +52,7 @@ void saveData(const std::vector<Patient>& patients, const std::vector<Staff>& st
         for (const Staff& staffMember : staff) {
             file.write(reinterpret_cast<const char*>(&staffMember), sizeof(Staff));
         }
-        std::cout << "Dane zapisane w pliku hospital_data.dat" << std::endl;
+        std::cout << "\nDane zapisane w pliku hospital_data.dat" << std::endl;
         file.close();
     } else {
         std::cerr << "Nie mozna otworzyc pliku do zapisu." << std::endl;
@@ -93,7 +93,7 @@ void loadData(std::vector<Patient>& patients, std::vector<Staff>& staff) {
 
 // Funkcja do wyświetlania pacjentów
 void displayPatients(const std::vector<Patient>& patients) {
-    std::cout << "Lista pacjentow:" << std::endl;
+    std::cout << "\nLista pacjentow:" << std::endl;
     for (const Patient& patient : patients) {
         std::cout << "Imię: " << patient.name << "\nWiek: " << patient.age << "\nDiagnoza: " << patient.diagnosis << std::endl;
     }
@@ -134,7 +134,7 @@ int main() {
             case 5:
                 return 0;
             default:
-                std::cout << "Nieprawidlowy wybor. Wybierz ponownie." << std::endl;
+                std::cout << "\nNieprawidlowy wybor. Wybierz ponownie." << std::endl;
         }
     }
 

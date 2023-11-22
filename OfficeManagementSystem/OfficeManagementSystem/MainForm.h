@@ -76,7 +76,7 @@ namespace OfficeManagementSystem {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->userNameTextBox->Location = System::Drawing::Point(105, 107);
 			this->userNameTextBox->Name = L"userNameTextBox";
-			this->userNameTextBox->Size = System::Drawing::Size(217, 20);
+			this->userNameTextBox->Size = System::Drawing::Size(277, 40);
 			this->userNameTextBox->TabIndex = 1;
 			// 
 			// passwordLabel
@@ -96,14 +96,14 @@ namespace OfficeManagementSystem {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->passwordTextBox->Location = System::Drawing::Point(105, 208);
 			this->passwordTextBox->Name = L"passwordTextBox";
-			this->passwordTextBox->Size = System::Drawing::Size(217, 20);
+			this->passwordTextBox->Size = System::Drawing::Size(277, 40);
 			this->passwordTextBox->TabIndex = 3;
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(416, 440);
+			this->ClientSize = System::Drawing::Size(476, 445);
 			this->Controls->Add(this->passwordTextBox);
 			this->Controls->Add(this->passwordLabel);
 			this->Controls->Add(this->userNameTextBox);

@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
-    <ProjectGuid>{F12C0BB6-376A-421C-91C5-B2BBA1CDEDF0}</ProjectGuid>
+    <ProjectGuid>{EB73AC83-3718-4E9D-A8C6-12D457A5A530}</ProjectGuid>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>OfficeManagementSystem</RootNamespace>
@@ -122,23 +122,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DatabaseHelper.cpp" />
-    <ClCompile Include="LoginForm.cpp" />
-    <ClCompile Include="Patient.cpp" />
+    <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DatabaseHelper.h" />
-    <ClInclude Include="LoginForm.h">
+    <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Patient.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="LoginForm.resx">
-      <DependentUpon>LoginForm.h</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

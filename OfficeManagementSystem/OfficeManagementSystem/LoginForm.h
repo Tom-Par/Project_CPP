@@ -1,5 +1,5 @@
 #pragma once
-#include "Patient.h"
+#include "User.h"
 
 namespace OfficeManagementSystem {
 
@@ -171,7 +171,7 @@ namespace OfficeManagementSystem {
 	private: System::Void cancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
-	public: Patient^ patient = nullptr;
+	public: User^ user = nullptr;
 
 	private: System::Void loginButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ email = this->emailTextBox->Text;
@@ -184,7 +184,7 @@ namespace OfficeManagementSystem {
 		}
 
 		try {
-			String^ connString = "Data Source = D:\\Github Repositories\\Project_CPP\\OfficeManagementSystem\\Database.db;";
+			String^ connString = "Data Source=DESKTOP-NJ16N45\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
 			SqlConnection sqlConn(connString);
 			sqlConn.Open();
 
@@ -195,9 +195,9 @@ namespace OfficeManagementSystem {
 
 			SqlDataReader^ reader = command.ExecuteReader();
 			if (reader->Read()) {
-				patient = gcnew Patient;
-				patient->id = reader->GetInt32(0);
-				patient->name = reader->GetString(1);
+				user = gcnew User;
+				user->id = reader->GetInt32(0);
+				user->name = reader->GetString(1);
 				this->Close();
 			}
 			else {

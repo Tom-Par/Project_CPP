@@ -2,7 +2,7 @@
 
 using namespace System;
 
-public ref class Patient {
+public ref class User {
 public: 
 	int id;
 	String^ name;

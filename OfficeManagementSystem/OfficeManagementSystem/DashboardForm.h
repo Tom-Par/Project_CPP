@@ -1,5 +1,5 @@
 #pragma once
-#include "Patient.h"
+#include "User.h"
 
 namespace OfficeManagementSystem {
 
@@ -16,15 +16,15 @@ namespace OfficeManagementSystem {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
-		MyForm(Patient^ patient)
+		MyForm(User^ user)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
 
-			userInfoLabel->Text = "ID = " + patient->id + ", Name = " + patient->name +
-				" , email = " + patient->email;
+			userInfoLabel->Text = "ID = " + user->id + ", Name = " + user->name +
+				" , email = " + user->email;
 		}
 
 	protected:

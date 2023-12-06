@@ -11,10 +11,10 @@ void main()
 	OfficeManagementSystem::MainForm mainForm;
 
 	mainForm.ShowDialog();
-	Patient^ patient = mainForm.patient;
+	User^ user = mainForm.user;
 
-	if (patient != nullptr) {
-		OfficeManagementSystem::MyForm myForm(patient);
+	if (user != nullptr) {
+		OfficeManagementSystem::MyForm myForm(user);
 		Application::Run(% myForm);
 	}
 	else {

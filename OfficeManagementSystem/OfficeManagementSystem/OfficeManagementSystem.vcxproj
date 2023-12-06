@@ -130,7 +130,7 @@
     <ClInclude Include="DashboardForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Patient.h" />
+    <ClInclude Include="User.h" />
     <ClInclude Include="LoginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

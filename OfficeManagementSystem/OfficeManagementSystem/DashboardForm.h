@@ -344,7 +344,7 @@ private: System::Void updateButton_Click(System::Object^ sender, System::EventAr
 }
 private: System::Void removeButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (id > 0) {
-		String^ query = "REMOVE FROM patient WHERE ID=@id;";
+		String^ query = "DELETE FROM patient WHERE ID=@id;";
 		SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
 		command->CommandType = CommandType::Text;
 		command->Parameters->AddWithValue("@id", this->id);

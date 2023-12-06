@@ -1,5 +1,6 @@
 #pragma once
 #include "User.h"
+#include "Patient.h"
 
 namespace OfficeManagementSystem {
 
@@ -172,6 +173,7 @@ namespace OfficeManagementSystem {
 		this->Close();
 	}
 	public: User^ user = nullptr;
+			Patient^ patient = nullptr;
 
 	private: System::Void loginButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ email = this->emailTextBox->Text;
@@ -198,6 +200,7 @@ namespace OfficeManagementSystem {
 				user = gcnew User;
 				user->id = reader->GetInt32(0);
 				user->name = reader->GetString(1);
+				user->email = reader->GetString(2);
 				this->Close();
 			}
 			else {

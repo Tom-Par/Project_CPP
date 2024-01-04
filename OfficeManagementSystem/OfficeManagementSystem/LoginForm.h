@@ -129,7 +129,7 @@ namespace OfficeManagementSystem {
 			// 
 			this->loginButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->loginButton->Location = System::Drawing::Point(163, 304);
+			this->loginButton->Location = System::Drawing::Point(84, 302);
 			this->loginButton->Name = L"loginButton";
 			this->loginButton->Size = System::Drawing::Size(121, 50);
 			this->loginButton->TabIndex = 5;
@@ -141,7 +141,7 @@ namespace OfficeManagementSystem {
 			// 
 			this->cancelButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->cancelButton->Location = System::Drawing::Point(321, 304);
+			this->cancelButton->Location = System::Drawing::Point(242, 302);
 			this->cancelButton->Name = L"cancelButton";
 			this->cancelButton->Size = System::Drawing::Size(119, 50);
 			this->cancelButton->TabIndex = 5;

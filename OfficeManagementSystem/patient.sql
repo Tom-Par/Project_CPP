@@ -1,0 +1,23 @@
+USE [users]
+GO
+
+/****** Object:  Table [dbo].[patient]    Script Date: 1/4/2024 7:24:59 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[patient](
+	[ID_P] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+	[age] [nchar](10) NOT NULL,
+	[phone] [nchar](10) NOT NULL,
+	[email] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_patiens] PRIMARY KEY CLUSTERED 
+(
+	[ID_P] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+

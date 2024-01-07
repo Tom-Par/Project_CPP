@@ -353,8 +353,10 @@ namespace OfficeManagementSystem {
 	private:
 		SqlConnection^ sqlConn;
 		int id;
+
+		// Main function to show data in Grid view
 		void showdata() {
-			String^ connString = "Data Source=LAPTOP_TOMMY\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
+			String^ connString = "Data Source=DESKTOP-NJ16N45\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
 			sqlConn = gcnew SqlConnection(connString); // Inicjalizacja sqlConn
 			sqlConn->Open();
 
@@ -369,11 +371,15 @@ namespace OfficeManagementSystem {
 			bindingSource1->DataSource = tb;
 
 			dataGridView1->DataSource = bindingSource1;
-			showdata_patient_data();
 			sqlConn->Close();
 		}
+		
+		// Second function to separate and chose detailed data about selected patient
+		void show_patient_data() {
+			String^ connString = "Data Source=DESKTOP-NJ16N45\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
+			sqlConn = gcnew SqlConnection(connString); // Inicjalizacja sqlConn
+			sqlConn->Open();
 
-		void showdata_patient_data() {
 			String^ query = "SELECT * FROM patient_data;";
 			SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
 			DataTable^ tb = gcnew DataTable();
@@ -385,50 +391,64 @@ namespace OfficeManagementSystem {
 			bindingSource2->DataSource = tb;
 
 			dataGridView2->DataSource = bindingSource2;
+			sqlConn->Close();
 
 		}
 
+		// Form load
 		System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 			showdata();
 		}
 
+		// Insert button
 		System::Void insertButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (patientNameLabel->Text == String::Empty) {
 				MessageBox::Show("Insert Name", "Name Error", MessageBoxButtons::OK);
 			}
 			else {
-				String^ query = "INSERT INTO patient(name, age, phone, email) VALUES ( @name, @age, @phone, @email);";
+				String^ query = "INSERT INTO patient(name, age, phone, email) OUTPUT INSERTED.ID_P VALUES (@name, @age, @phone, @email);";
 				String^ query_patient_data = "INSERT INTO patient_data(p_id, gender) VALUES (@p_id, @gender);";
-				String^ query_ptient_id = "SELECT ID_P FROM patient;";
 				SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
 				SqlCommand^ command2 = gcnew SqlCommand(query_patient_data, sqlConn);
+
 				command->CommandType = CommandType::Text;
 				command->Parameters->AddWithValue("@name", patientNameTextbox->Text);
 				command->Parameters->AddWithValue("@age", patientAgeTextbox->Text);
 				command->Parameters->AddWithValue("@phone", patientPhoneTextbox->Text);
 				command->Parameters->AddWithValue("@email", patientEmailTextbox->Text);
+
 				command2->CommandType = CommandType::Text;
 				command2->Parameters->AddWithValue("@gender", patientGendercomboBox->Text);
-				command2->Parameters->AddWithValue("@p_id", this->id);
+
 				sqlConn->Open();
-				command->ExecuteNonQuery();
+
+				// Execute the first query and retrieve the last inserted ID directly
+				int lastId = Convert::ToInt32(command->ExecuteScalar());
+
+				// Use the retrieved ID in the second query
+				command2->Parameters->AddWithValue("@p_id", lastId);
 				command2->ExecuteNonQuery();
+
 				sqlConn->Close();
 				MessageBox::Show("Data has been inserted", "Data Update", MessageBoxButtons::OK);
 				showdata();
-				}
+			}
 		}
+
+	// Data grid View cell click
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 		id = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
 		patientNameTextbox->Text = dataGridView1->SelectedRows[0]->Cells[1]->Value->ToString();
 		patientAgeTextbox->Text = dataGridView1->SelectedRows[0]->Cells[2]->Value->ToString();
 		patientPhoneTextbox->Text = dataGridView1->SelectedRows[0]->Cells[3]->Value->ToString();
 		patientEmailTextbox->Text = dataGridView1->SelectedRows[0]->Cells[4]->Value->ToString();
-		
+		show_patient_data();
 
 
 	}
-private: System::Void updateButton_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	// Update button 
+	private: System::Void updateButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (id > 0) {
 		String^ query = "UPDATE patient SET name=@name, age=@age, phone=@phone, email=@email WHERE ID_P=@id;";
 		SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
@@ -448,7 +468,9 @@ private: System::Void updateButton_Click(System::Object^ sender, System::EventAr
 		MessageBox::Show("Error", "Data update ERROR", MessageBoxButtons::OK);
 	}
 }
-private: System::Void removeButton_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	// Remove button
+	private: System::Void removeButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (id > 0) {
 		String^ query = "DELETE FROM patient WHERE ID_P=@id;";
 		String^ query_patient_data = "DELETE FROM patient_data WHERE p_id = @id";
@@ -471,6 +493,8 @@ private: System::Void removeButton_Click(System::Object^ sender, System::EventAr
 }
 
 private: 
+
+	// Function responsible for clearing all text boxes
 	void clear() {
 		patientNameTextbox->Text = "";
 		patientAgeTextbox->Text = "";
@@ -479,6 +503,7 @@ private:
 		patientGendercomboBox->Text = "";
 	}
 
+	// Clera button
 	System::Void clearButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		clear();
 }

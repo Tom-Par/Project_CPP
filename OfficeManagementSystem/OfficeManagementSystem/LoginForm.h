@@ -186,7 +186,7 @@ namespace OfficeManagementSystem {
 		}
 
 		try {
-			String^ connString = "Data Source=LAPTOP_TOMMY\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
+			String^ connString = "Data Source=DESKTOP-NJ16N45\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
 			SqlConnection sqlConn(connString);
 			sqlConn.Open();
 

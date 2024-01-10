@@ -46,7 +46,7 @@ private:
         this->visitDateTimePicker->CalendarFont = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
             System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
         this->visitDateTimePicker->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-        this->visitDateTimePicker->Location = System::Drawing::Point(12, 12);
+        this->visitDateTimePicker->Location = System::Drawing::Point(64, 40);
         this->visitDateTimePicker->Name = L"visitDateTimePicker";
         this->visitDateTimePicker->Size = System::Drawing::Size(200, 20);
         this->visitDateTimePicker->TabIndex = 0;
@@ -55,19 +55,19 @@ private:
         // 
         this->paidCheckBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
             static_cast<System::Byte>(238)));
-        this->paidCheckBox->Location = System::Drawing::Point(12, 38);
+        this->paidCheckBox->Location = System::Drawing::Point(64, 88);
         this->paidCheckBox->Name = L"paidCheckBox";
         this->paidCheckBox->Size = System::Drawing::Size(200, 40);
         this->paidCheckBox->TabIndex = 1;
-        this->paidCheckBox->Text = L"Is Paid";
+        this->paidCheckBox->Text = L"Oplacone";
         // 
         // visitAddButton
         // 
         this->visitAddButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
             static_cast<System::Byte>(238)));
-        this->visitAddButton->Location = System::Drawing::Point(229, 129);
+        this->visitAddButton->Location = System::Drawing::Point(260, 162);
         this->visitAddButton->Name = L"visitAddButton";
-        this->visitAddButton->Size = System::Drawing::Size(75, 30);
+        this->visitAddButton->Size = System::Drawing::Size(75, 45);
         this->visitAddButton->TabIndex = 2;
         this->visitAddButton->Text = L"Add";
         this->visitAddButton->UseVisualStyleBackColor = true;
@@ -77,7 +77,7 @@ private:
         // 
         this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
         this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-        this->ClientSize = System::Drawing::Size(316, 171);
+        this->ClientSize = System::Drawing::Size(347, 219);
         this->Controls->Add(this->visitAddButton);
         this->Controls->Add(this->paidCheckBox);
         this->Controls->Add(this->visitDateTimePicker);

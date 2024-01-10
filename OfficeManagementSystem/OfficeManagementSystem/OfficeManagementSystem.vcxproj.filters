@@ -27,6 +27,9 @@
     <ClCompile Include="VisitForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DetailedVisitForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoginForm.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VisitForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DetailedVisitForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

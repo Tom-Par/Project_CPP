@@ -2,6 +2,7 @@
 #include "User.h"
 #include "Patient.h"
 #include "VisitForm.h"
+#include "DetailedVisitForm.h"
 
 namespace OfficeManagementSystem {
 
@@ -137,9 +138,9 @@ namespace OfficeManagementSystem {
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
 			this->patientNameLabel->Location = System::Drawing::Point(80, 142);
 			this->patientNameLabel->Name = L"patientNameLabel";
-			this->patientNameLabel->Size = System::Drawing::Size(61, 24);
+			this->patientNameLabel->Size = System::Drawing::Size(45, 24);
 			this->patientNameLabel->TabIndex = 1;
-			this->patientNameLabel->Text = L"Name";
+			this->patientNameLabel->Text = L"Imie";
 			// 
 			// patientAgeLabel
 			// 
@@ -150,9 +151,9 @@ namespace OfficeManagementSystem {
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
 			this->patientAgeLabel->Location = System::Drawing::Point(80, 191);
 			this->patientAgeLabel->Name = L"patientAgeLabel";
-			this->patientAgeLabel->Size = System::Drawing::Size(45, 24);
+			this->patientAgeLabel->Size = System::Drawing::Size(52, 24);
 			this->patientAgeLabel->TabIndex = 1;
-			this->patientAgeLabel->Text = L"Age";
+			this->patientAgeLabel->Text = L"Wiek";
 			// 
 			// patientPhoneLabel
 			// 
@@ -163,9 +164,9 @@ namespace OfficeManagementSystem {
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
 			this->patientPhoneLabel->Location = System::Drawing::Point(80, 267);
 			this->patientPhoneLabel->Name = L"patientPhoneLabel";
-			this->patientPhoneLabel->Size = System::Drawing::Size(66, 24);
+			this->patientPhoneLabel->Size = System::Drawing::Size(42, 24);
 			this->patientPhoneLabel->TabIndex = 1;
-			this->patientPhoneLabel->Text = L"Phone";
+			this->patientPhoneLabel->Text = L"Tel.";
 			// 
 			// patientEmailLabel
 			// 
@@ -366,6 +367,7 @@ namespace OfficeManagementSystem {
 			this->detailedVisitAddButton->TabIndex = 10;
 			this->detailedVisitAddButton->Text = L"+";
 			this->detailedVisitAddButton->UseVisualStyleBackColor = true;
+			this->detailedVisitAddButton->Click += gcnew System::EventHandler(this, &MyForm::detailedVisitAddButton_Click);
 			// 
 			// MyForm
 			// 
@@ -416,7 +418,7 @@ namespace OfficeManagementSystem {
 
 		// Main function to show data in Grid view
 		void showdata() {
-			String^ connString = "Data Source=DESKTOP-NJ16N45\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
+			String^ connString = "Data Source=LAPTOP_TOMMY\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
 			sqlConn = gcnew SqlConnection(connString); // Inicjalizacja sqlConn
 			sqlConn->Open();
 
@@ -573,7 +575,7 @@ private:
 
 private:
 	System::Void visitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		// Upewnij siê, ¿e wybrano pacjenta
+		// Make sure that patient is selected
 		if (id > 0) {
 			VisitForm^ visitDialog = gcnew VisitForm(sqlConn, selectedPatientId);
 			visitDialog->ShowDialog();
@@ -583,6 +585,16 @@ private:
 			MessageBox::Show("Select a patient first", "Error", MessageBoxButtons::OK);
 		}
 	}
+private: System::Void detailedVisitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (id > 0) {
+		DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm();
+		visitDialog->ShowDialog();
+		show_patient_data();
+	}
+	else {
+		MessageBox::Show("Select a visit first", "Error", MessageBoxButtons::OK);
+	}
+}
 };
 
 };

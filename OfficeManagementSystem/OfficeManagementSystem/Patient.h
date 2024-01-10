@@ -7,6 +7,7 @@ public:
 	int id;
 	String^ name;
 	String^ email;
+	String^ gender;
 	int phone;
 	int age;
 };

@@ -125,6 +125,7 @@
     <ClCompile Include="LoginForm.cpp" />
     <ClCompile Include="DashboardForm.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="VisitForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DashboardForm.h">
@@ -135,6 +136,9 @@
     <ClInclude Include="LoginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="VisitForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LoginForm.resx">
@@ -142,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DashboardForm.resx">
       <DependentUpon>DashboardForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisitForm.resx">
+      <DependentUpon>VisitForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,6 +1,7 @@
 #pragma once
 #include "User.h"
 #include "Patient.h"
+#include "VisitForm.h"
 
 namespace OfficeManagementSystem {
 
@@ -57,6 +58,10 @@ namespace OfficeManagementSystem {
 	private: System::Windows::Forms::DataGridView^ dataGridView3;
 	private: System::Windows::Forms::Label^ genderLabel;
 	private: System::Windows::Forms::ComboBox^ patientGendercomboBox;
+	private: System::Windows::Forms::Label^ visit_label;
+	private: System::Windows::Forms::Label^ visitDetailsLabel;
+	private: System::Windows::Forms::Button^ visitAddButton;
+	private: System::Windows::Forms::Button^ detailedVisitAddButton;
 
 
 
@@ -101,6 +106,10 @@ namespace OfficeManagementSystem {
 			this->dataGridView3 = (gcnew System::Windows::Forms::DataGridView());
 			this->genderLabel = (gcnew System::Windows::Forms::Label());
 			this->patientGendercomboBox = (gcnew System::Windows::Forms::ComboBox());
+			this->visit_label = (gcnew System::Windows::Forms::Label());
+			this->visitDetailsLabel = (gcnew System::Windows::Forms::Label());
+			this->visitAddButton = (gcnew System::Windows::Forms::Button());
+			this->detailedVisitAddButton = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->BeginInit();
@@ -216,12 +225,12 @@ namespace OfficeManagementSystem {
 			this->dataGridView1->AllowUserToAddRows = false;
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(32, 398);
+			this->dataGridView1->Location = System::Drawing::Point(32, 373);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersVisible = false;
 			this->dataGridView1->RowHeadersWidth = 82;
 			this->dataGridView1->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dataGridView1->Size = System::Drawing::Size(540, 261);
+			this->dataGridView1->Size = System::Drawing::Size(540, 286);
 			this->dataGridView1->TabIndex = 4;
 			this->dataGridView1->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellClick);
 			// 
@@ -267,12 +276,12 @@ namespace OfficeManagementSystem {
 			this->dataGridView2->AllowUserToAddRows = false;
 			this->dataGridView2->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView2->Location = System::Drawing::Point(621, 103);
+			this->dataGridView2->Location = System::Drawing::Point(621, 142);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->RowHeadersVisible = false;
 			this->dataGridView2->RowHeadersWidth = 82;
 			this->dataGridView2->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dataGridView2->Size = System::Drawing::Size(511, 268);
+			this->dataGridView2->Size = System::Drawing::Size(511, 229);
 			this->dataGridView2->TabIndex = 4;
 			this->dataGridView2->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellClick);
 			// 
@@ -281,12 +290,12 @@ namespace OfficeManagementSystem {
 			this->dataGridView3->AllowUserToAddRows = false;
 			this->dataGridView3->BackgroundColor = System::Drawing::SystemColors::ButtonFace;
 			this->dataGridView3->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView3->Location = System::Drawing::Point(621, 398);
+			this->dataGridView3->Location = System::Drawing::Point(621, 434);
 			this->dataGridView3->Name = L"dataGridView3";
 			this->dataGridView3->RowHeadersVisible = false;
 			this->dataGridView3->RowHeadersWidth = 82;
 			this->dataGridView3->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			this->dataGridView3->Size = System::Drawing::Size(511, 261);
+			this->dataGridView3->Size = System::Drawing::Size(511, 225);
 			this->dataGridView3->TabIndex = 4;
 			this->dataGridView3->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellClick);
 			// 
@@ -313,11 +322,60 @@ namespace OfficeManagementSystem {
 			this->patientGendercomboBox->Size = System::Drawing::Size(214, 21);
 			this->patientGendercomboBox->TabIndex = 7;
 			// 
+			// visit_label
+			// 
+			this->visit_label->AutoSize = true;
+			this->visit_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->visit_label->Location = System::Drawing::Point(619, 114);
+			this->visit_label->Name = L"visit_label";
+			this->visit_label->Size = System::Drawing::Size(76, 25);
+			this->visit_label->TabIndex = 8;
+			this->visit_label->Text = L"Wizyty";
+			// 
+			// visitDetailsLabel
+			// 
+			this->visitDetailsLabel->AutoSize = true;
+			this->visitDetailsLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
+			this->visitDetailsLabel->Location = System::Drawing::Point(619, 406);
+			this->visitDetailsLabel->Name = L"visitDetailsLabel";
+			this->visitDetailsLabel->Size = System::Drawing::Size(126, 25);
+			this->visitDetailsLabel->TabIndex = 9;
+			this->visitDetailsLabel->Text = L"Opis Wizyty";
+			// 
+			// visitAddButton
+			// 
+			this->visitAddButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->visitAddButton->Location = System::Drawing::Point(1092, 103);
+			this->visitAddButton->Name = L"visitAddButton";
+			this->visitAddButton->Size = System::Drawing::Size(39, 33);
+			this->visitAddButton->TabIndex = 10;
+			this->visitAddButton->Text = L"+";
+			this->visitAddButton->UseVisualStyleBackColor = true;
+			this->visitAddButton->Click += gcnew System::EventHandler(this, &MyForm::visitAddButton_Click);
+			// 
+			// detailedVisitAddButton
+			// 
+			this->detailedVisitAddButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
+			this->detailedVisitAddButton->Location = System::Drawing::Point(1092, 395);
+			this->detailedVisitAddButton->Name = L"detailedVisitAddButton";
+			this->detailedVisitAddButton->Size = System::Drawing::Size(39, 33);
+			this->detailedVisitAddButton->TabIndex = 10;
+			this->detailedVisitAddButton->Text = L"+";
+			this->detailedVisitAddButton->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1173, 682);
+			this->Controls->Add(this->detailedVisitAddButton);
+			this->Controls->Add(this->visitAddButton);
+			this->Controls->Add(this->visitDetailsLabel);
+			this->Controls->Add(this->visit_label);
 			this->Controls->Add(this->patientGendercomboBox);
 			this->Controls->Add(this->clearButton);
 			this->Controls->Add(this->removeButton);
@@ -353,6 +411,8 @@ namespace OfficeManagementSystem {
 	private:
 		SqlConnection^ sqlConn;
 		int id;
+		int selectedPatientId;
+		int selectedRowIndex;
 
 		// Main function to show data in Grid view
 		void showdata() {
@@ -360,7 +420,7 @@ namespace OfficeManagementSystem {
 			sqlConn = gcnew SqlConnection(connString); // Inicjalizacja sqlConn
 			sqlConn->Open();
 
-			String^ query = "SELECT ID_P,name, age, phone, email FROM patient;";
+			String^ query = "SELECT ID_P,name, age, gender, phone, email FROM patient;";
 			SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
 			DataTable^ tb = gcnew DataTable();
 
@@ -376,23 +436,22 @@ namespace OfficeManagementSystem {
 		
 		// Second function to separate and chose detailed data about selected patient
 		void show_patient_data() {
-			String^ connString = "Data Source=DESKTOP-NJ16N45\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
-			sqlConn = gcnew SqlConnection(connString); // Inicjalizacja sqlConn
-			sqlConn->Open();
-
-			String^ query = "SELECT * FROM patient_data;";
+			// Pobierz tylko informacje o wizytach dla wybranego pacjenta
+			String^ query = "SELECT * FROM visit WHERE patient_id=@patient_id;";
 			SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
-			DataTable^ tb = gcnew DataTable();
-			 
+			command->CommandType = CommandType::Text;
+			command->Parameters->AddWithValue("@patient_id", selectedPatientId);
+
+			sqlConn->Open();
 			SqlDataReader^ sdr = command->ExecuteReader();
+			DataTable^ tb = gcnew DataTable();
 			tb->Load(sdr);
+			sqlConn->Close();
 
 			BindingSource^ bindingSource2 = gcnew BindingSource();
 			bindingSource2->DataSource = tb;
 
 			dataGridView2->DataSource = bindingSource2;
-			sqlConn->Close();
-
 		}
 
 		// Form load
@@ -406,28 +465,28 @@ namespace OfficeManagementSystem {
 				MessageBox::Show("Insert Name", "Name Error", MessageBoxButtons::OK);
 			}
 			else {
-				String^ query = "INSERT INTO patient(name, age, phone, email) OUTPUT INSERTED.ID_P VALUES (@name, @age, @phone, @email);";
-				String^ query_patient_data = "INSERT INTO patient_data(p_id, gender) VALUES (@p_id, @gender);";
+				String^ query = "INSERT INTO patient(name, age, gender, phone, email) VALUES (@name, @age, @gender, @phone, @email);";
+				//String^ query_patient_data = "INSERT INTO patient_data(p_id, gender) VALUES (@p_id, @gender);";
 				SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
-				SqlCommand^ command2 = gcnew SqlCommand(query_patient_data, sqlConn);
+				//SqlCommand^ command2 = gcnew SqlCommand(query_patient_data, sqlConn);
 
 				command->CommandType = CommandType::Text;
 				command->Parameters->AddWithValue("@name", patientNameTextbox->Text);
 				command->Parameters->AddWithValue("@age", patientAgeTextbox->Text);
+				command->Parameters->AddWithValue("@gender", patientGendercomboBox->Text);
 				command->Parameters->AddWithValue("@phone", patientPhoneTextbox->Text);
 				command->Parameters->AddWithValue("@email", patientEmailTextbox->Text);
 
-				command2->CommandType = CommandType::Text;
-				command2->Parameters->AddWithValue("@gender", patientGendercomboBox->Text);
+				//command2->CommandType = CommandType::Text;
 
 				sqlConn->Open();
 
 				// Execute the first query and retrieve the last inserted ID directly
-				int lastId = Convert::ToInt32(command->ExecuteScalar());
-
+				//int lastId = Convert::ToInt32(command->ExecuteScalar());
+				command->ExecuteScalar();
 				// Use the retrieved ID in the second query
-				command2->Parameters->AddWithValue("@p_id", lastId);
-				command2->ExecuteNonQuery();
+				//command2->Parameters->AddWithValue("@p_id", lastId);
+				//command2->ExecuteNonQuery();
 
 				sqlConn->Close();
 				MessageBox::Show("Data has been inserted", "Data Update", MessageBoxButtons::OK);
@@ -437,25 +496,27 @@ namespace OfficeManagementSystem {
 
 	// Data grid View cell click
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		id = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
-		patientNameTextbox->Text = dataGridView1->SelectedRows[0]->Cells[1]->Value->ToString();
-		patientAgeTextbox->Text = dataGridView1->SelectedRows[0]->Cells[2]->Value->ToString();
-		patientPhoneTextbox->Text = dataGridView1->SelectedRows[0]->Cells[3]->Value->ToString();
-		patientEmailTextbox->Text = dataGridView1->SelectedRows[0]->Cells[4]->Value->ToString();
-		show_patient_data();
+    id = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value); // Update the id variable
+    selectedPatientId = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
+    patientNameTextbox->Text = dataGridView1->SelectedRows[0]->Cells[1]->Value->ToString();
+    patientAgeTextbox->Text = dataGridView1->SelectedRows[0]->Cells[2]->Value->ToString();
+    patientGendercomboBox->Text = dataGridView1->SelectedRows[0]->Cells[3]->Value->ToString();
+    patientPhoneTextbox->Text = dataGridView1->SelectedRows[0]->Cells[4]->Value->ToString();
+    patientEmailTextbox->Text = dataGridView1->SelectedRows[0]->Cells[5]->Value->ToString();
+    show_patient_data();
+}
 
-
-	}
 
 	// Update button 
 	private: System::Void updateButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (id > 0) {
-		String^ query = "UPDATE patient SET name=@name, age=@age, phone=@phone, email=@email WHERE ID_P=@id;";
+		String^ query = "UPDATE patient SET name=@name, age=@age, gender=@gender, phone=@phone, email=@email WHERE ID_P=@id;";
 		SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
 		command->CommandType = CommandType::Text;
 		command->Parameters->AddWithValue("@id", this->id);
 		command->Parameters->AddWithValue("@name", patientNameTextbox->Text);
 		command->Parameters->AddWithValue("@age", patientAgeTextbox->Text);
+		command->Parameters->AddWithValue("@gender", patientGendercomboBox->Text);
 		command->Parameters->AddWithValue("@phone", patientPhoneTextbox->Text);
 		command->Parameters->AddWithValue("@email", patientEmailTextbox->Text);
 		sqlConn->Open();
@@ -473,16 +534,16 @@ namespace OfficeManagementSystem {
 	private: System::Void removeButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (id > 0) {
 		String^ query = "DELETE FROM patient WHERE ID_P=@id;";
-		String^ query_patient_data = "DELETE FROM patient_data WHERE p_id = @id";
+		//String^ query_patient_data = "DELETE FROM patient_data WHERE p_id = @id";
 		SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
-		SqlCommand^ command2 = gcnew SqlCommand(query_patient_data, sqlConn);
+		//SqlCommand^ command2 = gcnew SqlCommand(query_patient_data, sqlConn);
 		command->CommandType = CommandType::Text;
 		command->Parameters->AddWithValue("@id", this->id);
-		command2->CommandType = CommandType::Text;
-		command2->Parameters->AddWithValue("@id", this->id);
+		//command2->CommandType = CommandType::Text;
+		//command2->Parameters->AddWithValue("@id", this->id);
 		sqlConn->Open();
 		command->ExecuteNonQuery();
-		command2->ExecuteNonQuery();
+		//command2->ExecuteNonQuery();
 		sqlConn->Close();
 		MessageBox::Show("Data has been deleted", "Data Deleted", MessageBoxButtons::OK);
 		showdata();
@@ -507,6 +568,21 @@ private:
 	System::Void clearButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		clear();
 }
+
+	
+
+private:
+	System::Void visitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Upewnij siê, ¿e wybrano pacjenta
+		if (id > 0) {
+			VisitForm^ visitDialog = gcnew VisitForm(sqlConn, selectedPatientId);
+			visitDialog->ShowDialog();
+			show_patient_data();
+		}
+		else {
+			MessageBox::Show("Select a patient first", "Error", MessageBoxButtons::OK);
+		}
+	}
 };
 
 };

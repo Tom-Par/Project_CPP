@@ -8,6 +8,7 @@ namespace OfficeManagementSystem {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Data::SqlClient;
 
 	/// <summary>
 	/// Summary for DetailedVisitForm
@@ -15,12 +16,11 @@ namespace OfficeManagementSystem {
 	public ref class DetailedVisitForm : public System::Windows::Forms::Form
 	{
 	public:
-		DetailedVisitForm(void)
+		DetailedVisitForm(SqlConnection^ sqlConn,int selectedVisitId)
 		{
+			this->sqlConn = sqlConn;
+			this->selectedVisitId = selectedVisitId;
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
@@ -34,22 +34,45 @@ namespace OfficeManagementSystem {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::TextBox^ treatmentTextBox;
-	protected:
-	private: System::Windows::Forms::Label^ treatmentLabel;
-	private: System::Windows::Forms::Label^ descriptionLabel;
-	private: System::Windows::Forms::Label^ prescriptionLabel;
-	private: System::Windows::Forms::TextBox^ descriptionTextBox;
-	private: System::Windows::Forms::TextBox^ prescriptionTextBox;
-	private: System::Windows::Forms::Button^ detailedVisitFormAddButton;
+	private:
+	SqlConnection^ sqlConn;
+	int selectedVisitId;	
+
+	System::Windows::Forms::TextBox^ treatmentTextBox;
+	System::Windows::Forms::Label^ treatmentLabel;
+	System::Windows::Forms::Label^ descriptionLabel;
+	System::Windows::Forms::Label^ prescriptionLabel;
+	System::Windows::Forms::TextBox^ descriptionTextBox;
+	System::Windows::Forms::TextBox^ prescriptionTextBox;
+	System::Windows::Forms::Button^ detailedVisitFormAddButton;
 
 
 	protected:
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
+		
+		// ADD button
+		System::Void detailedVisitFormAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
+
+			//Open communication canal for database
+			sqlConn->Open();
+
+			String^ query = "INSERT INTO detailed_visit(visit_id, treatment, description, prescription)	VALUES (@visit_id, @treatment, @description, @prescription);";
+			SqlCommand ^ command = gcnew SqlCommand(query, sqlConn);
+			command->Parameters->AddWithValue("@visit_id", selectedVisitId);
+			command->Parameters->AddWithValue("@treatment", treatmentTextBox->Text);
+			command->Parameters->AddWithValue("@description", descriptionTextBox->Text);
+			command->Parameters->AddWithValue("@prescription", prescriptionTextBox->Text);
+
+			command->ExecuteNonQuery();
+
+			//close communication canal for database
+			sqlConn->Close();
+			MessageBox::Show("Data has been added", "Data Update", MessageBoxButtons::OK);
+
+			//close this form
+			this->Close();
+		}
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
@@ -138,6 +161,7 @@ namespace OfficeManagementSystem {
 			this->detailedVisitFormAddButton->TabIndex = 2;
 			this->detailedVisitFormAddButton->Text = L"Add";
 			this->detailedVisitFormAddButton->UseVisualStyleBackColor = true;
+			this->detailedVisitFormAddButton->Click += gcnew System::EventHandler(this, &DetailedVisitForm::detailedVisitFormAddButton_Click);
 			// 
 			// DetailedVisitForm
 			// 
@@ -158,5 +182,6 @@ namespace OfficeManagementSystem {
 
 		}
 #pragma endregion
-	};
+	
+};
 }

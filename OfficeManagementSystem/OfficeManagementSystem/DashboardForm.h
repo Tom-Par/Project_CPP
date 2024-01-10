@@ -284,7 +284,7 @@ namespace OfficeManagementSystem {
 			this->dataGridView2->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dataGridView2->Size = System::Drawing::Size(511, 229);
 			this->dataGridView2->TabIndex = 4;
-			this->dataGridView2->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellClick);
+			this->dataGridView2->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView2_CellClick);
 			// 
 			// dataGridView3
 			// 
@@ -298,7 +298,7 @@ namespace OfficeManagementSystem {
 			this->dataGridView3->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dataGridView3->Size = System::Drawing::Size(511, 225);
 			this->dataGridView3->TabIndex = 4;
-			this->dataGridView3->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellClick);
+			this->dataGridView3->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView2_CellClick);
 			// 
 			// genderLabel
 			// 
@@ -413,6 +413,7 @@ namespace OfficeManagementSystem {
 	private:
 		SqlConnection^ sqlConn;
 		int id;
+		int id_v;
 		int selectedPatientId;
 		int selectedRowIndex;
 
@@ -456,6 +457,26 @@ namespace OfficeManagementSystem {
 			dataGridView2->DataSource = bindingSource2;
 		}
 
+		//Show detailed visit data
+		void show_visit_data() {
+			// Pobierz tylko informacje o wizytach dla wybranego pacjenta
+			String^ query = "SELECT * FROM detailed_visit WHERE visit_id=@visit_id;";
+			SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
+			command->CommandType = CommandType::Text;
+			command->Parameters->AddWithValue("@visit_id", id_v);
+
+			sqlConn->Open();
+			SqlDataReader^ sdr = command->ExecuteReader();
+			DataTable^ tb = gcnew DataTable();
+			tb->Load(sdr);
+			sqlConn->Close();
+
+			BindingSource^ bindingSource3 = gcnew BindingSource();
+			bindingSource3->DataSource = tb;
+
+			dataGridView3->DataSource = bindingSource3;
+		}
+
 		// Form load
 		System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 			showdata();
@@ -496,21 +517,27 @@ namespace OfficeManagementSystem {
 			}
 		}
 
-	// Data grid View cell click
-	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-    id = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value); // Update the id variable
-    selectedPatientId = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
-    patientNameTextbox->Text = dataGridView1->SelectedRows[0]->Cells[1]->Value->ToString();
-    patientAgeTextbox->Text = dataGridView1->SelectedRows[0]->Cells[2]->Value->ToString();
-    patientGendercomboBox->Text = dataGridView1->SelectedRows[0]->Cells[3]->Value->ToString();
-    patientPhoneTextbox->Text = dataGridView1->SelectedRows[0]->Cells[4]->Value->ToString();
-    patientEmailTextbox->Text = dataGridView1->SelectedRows[0]->Cells[5]->Value->ToString();
-    show_patient_data();
-}
+		// Data grid View cell click
+		System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+			id = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value); // Update the id variable
+			selectedPatientId = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
+			patientNameTextbox->Text = dataGridView1->SelectedRows[0]->Cells[1]->Value->ToString();
+			patientAgeTextbox->Text = dataGridView1->SelectedRows[0]->Cells[2]->Value->ToString();
+			patientGendercomboBox->Text = dataGridView1->SelectedRows[0]->Cells[3]->Value->ToString();
+			patientPhoneTextbox->Text = dataGridView1->SelectedRows[0]->Cells[4]->Value->ToString();
+			patientEmailTextbox->Text = dataGridView1->SelectedRows[0]->Cells[5]->Value->ToString();
+			show_patient_data();
+			show_visit_data();
+		}
+
+		System::Void dataGridView2_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+			id_v = Convert::ToInt32(dataGridView2->SelectedRows[0]->Cells[0]->Value);
+			show_visit_data();
+		}
 
 
-	// Update button 
-	private: System::Void updateButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Update button 
+		System::Void updateButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (id > 0) {
 		String^ query = "UPDATE patient SET name=@name, age=@age, gender=@gender, phone=@phone, email=@email WHERE ID_P=@id;";
 		SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
@@ -532,8 +559,8 @@ namespace OfficeManagementSystem {
 	}
 }
 
-	// Remove button
-	private: System::Void removeButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Remove button
+		System::Void removeButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (id > 0) {
 		String^ query = "DELETE FROM patient WHERE ID_P=@id;";
 		//String^ query_patient_data = "DELETE FROM patient_data WHERE p_id = @id";
@@ -555,10 +582,8 @@ namespace OfficeManagementSystem {
 	}
 }
 
-private: 
-
-	// Function responsible for clearing all text boxes
-	void clear() {
+		// Function responsible for clearing all text boxes
+		void clear() {
 		patientNameTextbox->Text = "";
 		patientAgeTextbox->Text = "";
 		patientPhoneTextbox->Text = "";
@@ -566,35 +591,35 @@ private:
 		patientGendercomboBox->Text = "";
 	}
 
-	// Clera button
-	System::Void clearButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Clera button
+		System::Void clearButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		clear();
 }
 
-	
+		// Visit Add Button
+		System::Void visitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			// Make sure that patient is selected
+			if (id > 0) {
+				VisitForm^ visitDialog = gcnew VisitForm(sqlConn, selectedPatientId);
+				visitDialog->ShowDialog();
+				show_patient_data();
+			}
+			else {
+				MessageBox::Show("Select a patient first", "Error", MessageBoxButtons::OK);
+			}
+		}
 
-private:
-	System::Void visitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		// Make sure that patient is selected
-		if (id > 0) {
-			VisitForm^ visitDialog = gcnew VisitForm(sqlConn, selectedPatientId);
+		//Visit Details Add Button
+		System::Void detailedVisitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (id_v > 0) {
+			DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm(sqlConn, id_v);
 			visitDialog->ShowDialog();
-			show_patient_data();
+			show_visit_data();
 		}
 		else {
-			MessageBox::Show("Select a patient first", "Error", MessageBoxButtons::OK);
+			MessageBox::Show("Select a visit first", "Error", MessageBoxButtons::OK);
 		}
 	}
-private: System::Void detailedVisitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (id > 0) {
-		DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm();
-		visitDialog->ShowDialog();
-		show_patient_data();
-	}
-	else {
-		MessageBox::Show("Select a visit first", "Error", MessageBoxButtons::OK);
-	}
-}
 };
 
 };

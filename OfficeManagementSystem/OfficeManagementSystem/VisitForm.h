@@ -99,21 +99,21 @@ private: System::Void visitAddButton_Click(System::Object^ sender, System::Event
     
     sqlConn->Open();
 
-    // Przygotuj i wykonaj zapytanie SQL
+    // Prepare and do SQL command
     String^ query = "INSERT INTO visit(patient_id, date, is_paid) VALUES (@patient_id, @visit_date, @is_paid);";
     SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
-    command->Parameters->AddWithValue("@patient_id", selectedPatientId); // Upewnij siê, ¿e selectedPatientId jest dostêpne
+    command->Parameters->AddWithValue("@patient_id", selectedPatientId); 
     command->Parameters->AddWithValue("@visit_date", VisitDate);
     command->Parameters->AddWithValue("@is_paid", IsPaid ? "Tak" : "Nie");
 
     command->ExecuteNonQuery();
 
-    // Zamknij po³¹czenie z baz¹ danych
+    // Close connection
     sqlConn->Close();
 
-    // Wyœwietl komunikat
+    // Show Message
     MessageBox::Show("Visit data has been added", "Data Update", MessageBoxButtons::OK);
-    // Zamknij formularz
+    // Close form
     this->Close();
 }
 

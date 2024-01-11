@@ -93,7 +93,6 @@ namespace OfficeManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->userPanelLabel = (gcnew System::Windows::Forms::Label());
 			this->patientNameLabel = (gcnew System::Windows::Forms::Label());
 			this->patientAgeLabel = (gcnew System::Windows::Forms::Label());
@@ -190,39 +189,47 @@ namespace OfficeManagementSystem {
 			// 
 			// patientNameTextbox
 			// 
-			this->patientNameTextbox->Location = System::Drawing::Point(158, 145);
+			this->patientNameTextbox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->patientNameTextbox->Location = System::Drawing::Point(158, 135);
 			this->patientNameTextbox->Name = L"patientNameTextbox";
-			this->patientNameTextbox->Size = System::Drawing::Size(214, 20);
+			this->patientNameTextbox->Size = System::Drawing::Size(214, 31);
 			this->patientNameTextbox->TabIndex = 2;
 			// 
 			// patientAgeTextbox
 			// 
-			this->patientAgeTextbox->Location = System::Drawing::Point(158, 191);
+			this->patientAgeTextbox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->patientAgeTextbox->Location = System::Drawing::Point(158, 184);
 			this->patientAgeTextbox->Name = L"patientAgeTextbox";
-			this->patientAgeTextbox->Size = System::Drawing::Size(214, 20);
+			this->patientAgeTextbox->Size = System::Drawing::Size(214, 31);
 			this->patientAgeTextbox->TabIndex = 2;
 			// 
 			// patientPhoneTextbox
 			// 
-			this->patientPhoneTextbox->Location = System::Drawing::Point(158, 269);
+			this->patientPhoneTextbox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->patientPhoneTextbox->Location = System::Drawing::Point(158, 263);
 			this->patientPhoneTextbox->Name = L"patientPhoneTextbox";
-			this->patientPhoneTextbox->Size = System::Drawing::Size(214, 20);
+			this->patientPhoneTextbox->Size = System::Drawing::Size(214, 31);
 			this->patientPhoneTextbox->TabIndex = 2;
 			// 
 			// patientEmailTextbox
 			// 
-			this->patientEmailTextbox->Location = System::Drawing::Point(158, 308);
+			this->patientEmailTextbox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->patientEmailTextbox->Location = System::Drawing::Point(158, 300);
 			this->patientEmailTextbox->Name = L"patientEmailTextbox";
-			this->patientEmailTextbox->Size = System::Drawing::Size(214, 20);
+			this->patientEmailTextbox->Size = System::Drawing::Size(214, 31);
 			this->patientEmailTextbox->TabIndex = 2;
 			// 
 			// insertButton
 			// 
 			this->insertButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->insertButton->Location = System::Drawing::Point(432, 145);
+			this->insertButton->Location = System::Drawing::Point(432, 136);
 			this->insertButton->Name = L"insertButton";
-			this->insertButton->Size = System::Drawing::Size(106, 30);
+			this->insertButton->Size = System::Drawing::Size(106, 38);
 			this->insertButton->TabIndex = 3;
 			this->insertButton->Text = L"Insert";
 			this->insertButton->UseVisualStyleBackColor = true;
@@ -246,9 +253,9 @@ namespace OfficeManagementSystem {
 			// 
 			this->updateButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->updateButton->Location = System::Drawing::Point(432, 198);
+			this->updateButton->Location = System::Drawing::Point(432, 191);
 			this->updateButton->Name = L"updateButton";
-			this->updateButton->Size = System::Drawing::Size(106, 31);
+			this->updateButton->Size = System::Drawing::Size(106, 36);
 			this->updateButton->TabIndex = 3;
 			this->updateButton->Text = L"Update";
 			this->updateButton->UseVisualStyleBackColor = true;
@@ -258,9 +265,9 @@ namespace OfficeManagementSystem {
 			// 
 			this->removeButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->removeButton->Location = System::Drawing::Point(432, 251);
+			this->removeButton->Location = System::Drawing::Point(432, 242);
 			this->removeButton->Name = L"removeButton";
-			this->removeButton->Size = System::Drawing::Size(106, 31);
+			this->removeButton->Size = System::Drawing::Size(106, 38);
 			this->removeButton->TabIndex = 5;
 			this->removeButton->Text = L"Remove";
 			this->removeButton->UseVisualStyleBackColor = true;
@@ -270,10 +277,10 @@ namespace OfficeManagementSystem {
 			// 
 			this->clearButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->clearButton->Location = System::Drawing::Point(432, 300);
+			this->clearButton->Location = System::Drawing::Point(432, 293);
 			this->clearButton->Margin = System::Windows::Forms::Padding(2);
 			this->clearButton->Name = L"clearButton";
-			this->clearButton->Size = System::Drawing::Size(106, 32);
+			this->clearButton->Size = System::Drawing::Size(106, 38);
 			this->clearButton->TabIndex = 6;
 			this->clearButton->Text = L"Clear";
 			this->clearButton->UseVisualStyleBackColor = true;
@@ -305,7 +312,7 @@ namespace OfficeManagementSystem {
 			this->dataGridView3->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dataGridView3->Size = System::Drawing::Size(511, 225);
 			this->dataGridView3->TabIndex = 4;
-			this->dataGridView3->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView2_CellClick);
+			this->dataGridView3->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView3_CellClick);
 			// 
 			// genderLabel
 			// 
@@ -322,12 +329,14 @@ namespace OfficeManagementSystem {
 			// 
 			// patientGendercomboBox
 			// 
+			this->patientGendercomboBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->patientGendercomboBox->FormattingEnabled = true;
 			this->patientGendercomboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Male", L"Female" });
-			this->patientGendercomboBox->Location = System::Drawing::Point(158, 231);
+			this->patientGendercomboBox->Location = System::Drawing::Point(158, 222);
 			this->patientGendercomboBox->Margin = System::Windows::Forms::Padding(2);
 			this->patientGendercomboBox->Name = L"patientGendercomboBox";
-			this->patientGendercomboBox->Size = System::Drawing::Size(214, 21);
+			this->patientGendercomboBox->Size = System::Drawing::Size(214, 33);
 			this->patientGendercomboBox->TabIndex = 7;
 			// 
 			// visit_label
@@ -380,7 +389,6 @@ namespace OfficeManagementSystem {
 			// 
 			this->visitEditButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
-			this->visitEditButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"visitEditButton.Image")));
 			this->visitEditButton->Location = System::Drawing::Point(1047, 103);
 			this->visitEditButton->Name = L"visitEditButton";
 			this->visitEditButton->Size = System::Drawing::Size(39, 33);
@@ -392,12 +400,12 @@ namespace OfficeManagementSystem {
 			// 
 			this->detailsVisitEditButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
-			this->detailsVisitEditButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"detailsVisitEditButton.Image")));
 			this->detailsVisitEditButton->Location = System::Drawing::Point(1047, 395);
 			this->detailsVisitEditButton->Name = L"detailsVisitEditButton";
 			this->detailsVisitEditButton->Size = System::Drawing::Size(39, 33);
 			this->detailsVisitEditButton->TabIndex = 10;
 			this->detailsVisitEditButton->UseVisualStyleBackColor = true;
+			this->detailsVisitEditButton->Click += gcnew System::EventHandler(this, &MyForm::detailsVisitEditButton_Click);
 			// 
 			// MyForm
 			// 
@@ -446,6 +454,7 @@ namespace OfficeManagementSystem {
 		SqlConnection^ sqlConn;
 		int id;
 		int id_v;
+		int id_d;
 		int selectedPatientId;
 		int selectedRowIndex;
 
@@ -569,6 +578,12 @@ namespace OfficeManagementSystem {
 			show_visit_data();
 		}
 
+		// Data grid View 3 cell click
+		System::Void dataGridView3_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+			id_d = Convert::ToInt32(dataGridView2->SelectedRows[0]->Cells[0]->Value);
+			show_visit_data();
+		}
+
 		// Update button 
 		System::Void updateButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (id > 0) {
@@ -633,7 +648,7 @@ namespace OfficeManagementSystem {
 		System::Void visitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			// Make sure that patient is selected
 			if (id > 0) {
-				VisitForm^ visitDialog = gcnew VisitForm(sqlConn, selectedPatientId);
+				VisitForm^ visitDialog = gcnew VisitForm(sqlConn, selectedPatientId, false);
 				visitDialog->ShowDialog();
 				show_patient_data();
 			}
@@ -645,7 +660,7 @@ namespace OfficeManagementSystem {
 		//Visit Details Add Button
 		System::Void detailedVisitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (id_v > 0) {
-			DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm(sqlConn, id_v);
+			DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm(sqlConn, id_v, false);
 			visitDialog->ShowDialog();
 			show_visit_data();
 		}
@@ -657,11 +672,28 @@ namespace OfficeManagementSystem {
 		// Button to edit visit date and if visit was paid
 		System::Void visitEditButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (id_v > 0) {
-				VisitForm^ visitDialog = gcnew VisitForm(sqlConn, id_v);
+				VisitForm^ visitDialog = gcnew VisitForm(sqlConn, id_v, true);
+				visitDialog->ShowDialog();
+				show_patient_data();
+			}
+			else {
+				MessageBox::Show("Selec a visit first", "Error", MessageBoxButtons::OK);
 			}
 		
 		}
-};
+
+		// Button to edit visit details - event handler
+		System::Void detailsVisitEditButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (id_d > 0) {
+				DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm(sqlConn, id_d, true);
+				visitDialog->ShowDialog();
+				show_visit_data();
+			}
+			else {
+				MessageBox::Show("Select visit details first", "Error", MessageBoxButtons::OK);
+			}
+		}
+	};
 
 };
 

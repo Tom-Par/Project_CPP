@@ -16,10 +16,11 @@ namespace OfficeManagementSystem {
 	public ref class DetailedVisitForm : public System::Windows::Forms::Form
 	{
 	public:
-		DetailedVisitForm(SqlConnection^ sqlConn,int selectedVisitId)
+		DetailedVisitForm(SqlConnection^ sqlConn,int selectedId, bool edit)
 		{
 			this->sqlConn = sqlConn;
-			this->selectedVisitId = selectedVisitId;
+			this->selectedId = selectedId;
+			this->edit = edit;
 			InitializeComponent();
 		}
 
@@ -36,8 +37,8 @@ namespace OfficeManagementSystem {
 		}
 	private:
 	SqlConnection^ sqlConn;
-	int selectedVisitId;	
-
+	int selectedId;	
+	bool edit = false;
 	System::Windows::Forms::TextBox^ treatmentTextBox;
 	System::Windows::Forms::Label^ treatmentLabel;
 	System::Windows::Forms::Label^ descriptionLabel;
@@ -51,7 +52,7 @@ namespace OfficeManagementSystem {
 
 	private:
 		
-		// ADD button
+		// ADD button - event handler
 		System::Void detailedVisitFormAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
 
 			//Open communication canal for database
@@ -59,7 +60,7 @@ namespace OfficeManagementSystem {
 
 			String^ query = "INSERT INTO detailed_visit(visit_id, treatment, description, prescription)	VALUES (@visit_id, @treatment, @description, @prescription);";
 			SqlCommand ^ command = gcnew SqlCommand(query, sqlConn);
-			command->Parameters->AddWithValue("@visit_id", selectedVisitId);
+			command->Parameters->AddWithValue("@visit_id", selectedId);
 			command->Parameters->AddWithValue("@treatment", treatmentTextBox->Text);
 			command->Parameters->AddWithValue("@description", descriptionTextBox->Text);
 			command->Parameters->AddWithValue("@prescription", prescriptionTextBox->Text);
@@ -73,6 +74,30 @@ namespace OfficeManagementSystem {
 			//close this form
 			this->Close();
 		}
+
+		// Update button - event handler
+		System::Void detailedVisitFormEditButton_Click(System::Object^ sender, System::EventArgs^ e) {
+
+			//Open communication canal for database
+			sqlConn->Open();
+
+			String^ query = "UPDATE detailed_visit SET treatment=@treatment, description=@description, prescription=@prescription WHERE ID_D=@visit_id;";
+			SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
+			command->Parameters->AddWithValue("@visit_id", selectedId);
+			command->Parameters->AddWithValue("@treatment", treatmentTextBox->Text);
+			command->Parameters->AddWithValue("@description", descriptionTextBox->Text);
+			command->Parameters->AddWithValue("@prescription", prescriptionTextBox->Text);
+
+			command->ExecuteNonQuery();
+
+			//close communication canal for database
+			sqlConn->Close();
+			MessageBox::Show("Data has been updated", "Data Update", MessageBoxButtons::OK);
+
+			//close this form
+			this->Close();
+		}
+
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
@@ -155,13 +180,21 @@ namespace OfficeManagementSystem {
 			// 
 			this->detailedVisitFormAddButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->detailedVisitFormAddButton->Location = System::Drawing::Point(376, 363);
+			this->detailedVisitFormAddButton->Location = System::Drawing::Point(333, 357);
 			this->detailedVisitFormAddButton->Name = L"detailedVisitFormAddButton";
-			this->detailedVisitFormAddButton->Size = System::Drawing::Size(76, 46);
 			this->detailedVisitFormAddButton->TabIndex = 2;
-			this->detailedVisitFormAddButton->Text = L"Add";
+			this->detailedVisitFormAddButton->TabStop = false;
 			this->detailedVisitFormAddButton->UseVisualStyleBackColor = true;
-			this->detailedVisitFormAddButton->Click += gcnew System::EventHandler(this, &DetailedVisitForm::detailedVisitFormAddButton_Click);
+			if (edit == false) {
+				this->detailedVisitFormAddButton->Size = System::Drawing::Size(76, 46);
+				this->detailedVisitFormAddButton->Text = L"Add";
+				this->detailedVisitFormAddButton->Click += gcnew System::EventHandler(this, &DetailedVisitForm::detailedVisitFormAddButton_Click);
+			}
+			else {
+				this->detailedVisitFormAddButton->Size = System::Drawing::Size(150, 46);
+				this->detailedVisitFormAddButton->Text = L"Update";
+				this->detailedVisitFormAddButton->Click += gcnew System::EventHandler(this, &DetailedVisitForm::detailedVisitFormEditButton_Click);
+			}
 			// 
 			// DetailedVisitForm
 			// 

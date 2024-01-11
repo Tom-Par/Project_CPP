@@ -7,10 +7,11 @@ using namespace System::Data::SqlClient;
 public ref class VisitForm : public System::Windows::Forms::Form
 {
 public:
-    VisitForm(SqlConnection^ sqlConn,int selectedId)
+    VisitForm(SqlConnection^ sqlConn,int selectedId, bool edit)
     {
         this->sqlConn = sqlConn;
         this->selectedId = selectedId;
+        this->edit = edit;
         InitializeComponent();
     }
 
@@ -30,6 +31,7 @@ protected:
 private:
     SqlConnection^ sqlConn;
     int selectedId;
+    bool edit = false;
     System::Windows::Forms::DateTimePicker^ visitDateTimePicker;
     System::Windows::Forms::Button^ visitAddButton;
     System::Windows::Forms::CheckBox^ paidCheckBox;
@@ -67,23 +69,34 @@ private:
             static_cast<System::Byte>(238)));
         this->visitAddButton->Location = System::Drawing::Point(260, 162);
         this->visitAddButton->Name = L"visitAddButton";
-        this->visitAddButton->Size = System::Drawing::Size(75, 45);
         this->visitAddButton->TabIndex = 2;
-        this->visitAddButton->Text = L"Add";
         this->visitAddButton->UseVisualStyleBackColor = true;
-        this->visitAddButton->Click += gcnew System::EventHandler(this, &VisitForm::visitAddButton_Click);
+        if (edit == false) {
+            this->visitAddButton->Size = System::Drawing::Size(75, 45);
+            this->visitAddButton->Text = L"Add";
+            this->visitAddButton->Click += gcnew System::EventHandler(this, &VisitForm::visitAddButton_Click);
+            this->ClientSize = System::Drawing::Size(347, 219);
+        }
+        else {
+            this->visitAddButton->Size = System::Drawing::Size(150, 45);
+            this->visitAddButton->Text = L"Update";
+            this->visitAddButton->Click += gcnew System::EventHandler(this, &VisitForm::visitEditButton_Click);
+            this->ClientSize = System::Drawing::Size(450, 240);
+
+        }
         // 
         // VisitForm
         // 
         this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
         this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-        this->ClientSize = System::Drawing::Size(347, 219);
         this->Controls->Add(this->visitAddButton);
         this->Controls->Add(this->paidCheckBox);
         this->Controls->Add(this->visitDateTimePicker);
         this->Name = L"VisitForm";
         this->Text = L"Visit Form";
         this->ResumeLayout(false);
+
+
 
     }
 
@@ -95,14 +108,17 @@ public:
         return paidCheckBox->Checked;
     }
 
-private: System::Void visitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
+private: 
+    
+    // Add visit event handler
+    System::Void visitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
     
     sqlConn->Open();
 
     // Prepare and do SQL command
     String^ query = "INSERT INTO visit(patient_id, date, is_paid) VALUES (@patient_id, @visit_date, @is_paid);";
     SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
-    command->Parameters->AddWithValue("@patient_id", selectedPatientId); 
+    command->Parameters->AddWithValue("@patient_id", selectedId); 
     command->Parameters->AddWithValue("@visit_date", VisitDate);
     command->Parameters->AddWithValue("@is_paid", IsPaid ? "Tak" : "Nie");
 
@@ -112,10 +128,33 @@ private: System::Void visitAddButton_Click(System::Object^ sender, System::Event
     sqlConn->Close();
 
     // Show Message
-    MessageBox::Show("Visit data has been added", "Data Update", MessageBoxButtons::OK);
+    MessageBox::Show("Visit data has been added", "New Visit", MessageBoxButtons::OK);
     // Close form
     this->Close();
 }
+
+    // Edit visit event handler
+    System::Void visitEditButton_Click(System::Object^ sender, System::EventArgs^ e) {
+
+        sqlConn->Open();
+
+        // Prepare and do SQL command
+        String^ query = "UPDATE visit SET date=@visit_date, is_paid=@is_paid WHERE ID_V=@selectedId";
+        SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
+        command->Parameters->AddWithValue("@selectedId", selectedId);  
+        command->Parameters->AddWithValue("@visit_date", VisitDate);
+        command->Parameters->AddWithValue("@is_paid", IsPaid ? "Tak" : "Nie");
+
+        command->ExecuteNonQuery();
+
+        // Close connection
+        sqlConn->Close();
+
+        // Show Message
+        MessageBox::Show("Visit data has been updated", "Data Update", MessageBoxButtons::OK);
+        // Close form
+        this->Close();
+     }
 
 };
 

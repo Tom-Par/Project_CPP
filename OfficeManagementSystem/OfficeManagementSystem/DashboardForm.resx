@@ -117,25 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="visitEditButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        WAAAAFgBeNpLYgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC8SURBVDhP7dI9
-        CsIwGMbx7HqMLoJ6g256BQfFTQQXB08gInowPYDuuhTxC8RVN/9PYigUUtPdB36QN+XNB42pmCb2eGKi
-        iSpp4YLxd3xE9CJqeGNtKxfNPdywPH7nBe7oQBlh54bh+OaBrYxJccMKV+h7MA2cMLRVnjl0nbatAgk1
-        93DGv7mQGl6Y2SpPH/pVpc1KF3qWGRJNkKidfZbQE9XL0iJTRDcrG2gB0Ul+PpJiDthCJ9F16oiMMR/n
-        jjH7ERTfEQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="detailsVisitEditButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        WAAAAFgBeNpLYgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC8SURBVDhP7dI9
-        CsIwGMbx7HqMLoJ6g256BQfFTQQXB08gInowPYDuuhTxC8RVN/9PYigUUtPdB36QN+XNB42pmCb2eGKi
-        iSpp4YLxd3xE9CJqeGNtKxfNPdywPH7nBe7oQBlh54bh+OaBrYxJccMKV+h7MA2cMLRVnjl0nbatAgk1
-        93DGv7mQGl6Y2SpPH/pVpc1KF3qWGRJNkKidfZbQE9XL0iJTRDcrG2gB0Ul+PpJiDthCJ9F16oiMMR/n
-        jjH7ERTfEQAAAABJRU5ErkJggg==
-</value>
-  </data>
 </root>

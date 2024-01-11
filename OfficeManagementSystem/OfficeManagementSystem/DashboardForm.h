@@ -63,6 +63,10 @@ namespace OfficeManagementSystem {
 	private: System::Windows::Forms::Label^ visitDetailsLabel;
 	private: System::Windows::Forms::Button^ visitAddButton;
 	private: System::Windows::Forms::Button^ detailedVisitAddButton;
+	private: System::Windows::Forms::Button^ visitEditButton;
+	private: System::Windows::Forms::Button^ detailsVisitEditButton;
+
+
 
 
 
@@ -89,6 +93,7 @@ namespace OfficeManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->userPanelLabel = (gcnew System::Windows::Forms::Label());
 			this->patientNameLabel = (gcnew System::Windows::Forms::Label());
 			this->patientAgeLabel = (gcnew System::Windows::Forms::Label());
@@ -111,6 +116,8 @@ namespace OfficeManagementSystem {
 			this->visitDetailsLabel = (gcnew System::Windows::Forms::Label());
 			this->visitAddButton = (gcnew System::Windows::Forms::Button());
 			this->detailedVisitAddButton = (gcnew System::Windows::Forms::Button());
+			this->visitEditButton = (gcnew System::Windows::Forms::Button());
+			this->detailsVisitEditButton = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView3))->BeginInit();
@@ -369,12 +376,37 @@ namespace OfficeManagementSystem {
 			this->detailedVisitAddButton->UseVisualStyleBackColor = true;
 			this->detailedVisitAddButton->Click += gcnew System::EventHandler(this, &MyForm::detailedVisitAddButton_Click);
 			// 
+			// visitEditButton
+			// 
+			this->visitEditButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
+			this->visitEditButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"visitEditButton.Image")));
+			this->visitEditButton->Location = System::Drawing::Point(1047, 103);
+			this->visitEditButton->Name = L"visitEditButton";
+			this->visitEditButton->Size = System::Drawing::Size(39, 33);
+			this->visitEditButton->TabIndex = 10;
+			this->visitEditButton->UseVisualStyleBackColor = true;
+			this->visitEditButton->Click += gcnew System::EventHandler(this, &MyForm::visitEditButton_Click);
+			// 
+			// detailsVisitEditButton
+			// 
+			this->detailsVisitEditButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
+			this->detailsVisitEditButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"detailsVisitEditButton.Image")));
+			this->detailsVisitEditButton->Location = System::Drawing::Point(1047, 395);
+			this->detailsVisitEditButton->Name = L"detailsVisitEditButton";
+			this->detailsVisitEditButton->Size = System::Drawing::Size(39, 33);
+			this->detailsVisitEditButton->TabIndex = 10;
+			this->detailsVisitEditButton->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1173, 682);
+			this->Controls->Add(this->detailsVisitEditButton);
 			this->Controls->Add(this->detailedVisitAddButton);
+			this->Controls->Add(this->visitEditButton);
 			this->Controls->Add(this->visitAddButton);
 			this->Controls->Add(this->visitDetailsLabel);
 			this->Controls->Add(this->visit_label);
@@ -517,7 +549,7 @@ namespace OfficeManagementSystem {
 			}
 		}
 
-		// Data grid View cell click
+		// Data grid View 1 cell click
 		System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 			id = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value); // Update the id variable
 			selectedPatientId = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
@@ -526,15 +558,16 @@ namespace OfficeManagementSystem {
 			patientGendercomboBox->Text = dataGridView1->SelectedRows[0]->Cells[3]->Value->ToString();
 			patientPhoneTextbox->Text = dataGridView1->SelectedRows[0]->Cells[4]->Value->ToString();
 			patientEmailTextbox->Text = dataGridView1->SelectedRows[0]->Cells[5]->Value->ToString();
+			id_v = 0;
 			show_patient_data();
 			show_visit_data();
 		}
 
+		// Data grid View 2 cell click
 		System::Void dataGridView2_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 			id_v = Convert::ToInt32(dataGridView2->SelectedRows[0]->Cells[0]->Value);
 			show_visit_data();
 		}
-
 
 		// Update button 
 		System::Void updateButton_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -620,6 +653,14 @@ namespace OfficeManagementSystem {
 			MessageBox::Show("Select a visit first", "Error", MessageBoxButtons::OK);
 		}
 	}
+		
+		// Button to edit visit date and if visit was paid
+		System::Void visitEditButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (id_v > 0) {
+				VisitForm^ visitDialog = gcnew VisitForm(sqlConn, id_v);
+			}
+		
+		}
 };
 
 };

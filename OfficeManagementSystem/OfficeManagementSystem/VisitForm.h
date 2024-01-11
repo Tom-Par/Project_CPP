@@ -7,10 +7,10 @@ using namespace System::Data::SqlClient;
 public ref class VisitForm : public System::Windows::Forms::Form
 {
 public:
-    VisitForm(SqlConnection^ sqlConn,int selectedPatientId)
+    VisitForm(SqlConnection^ sqlConn,int selectedId)
     {
         this->sqlConn = sqlConn;
-        this->selectedPatientId = selectedPatientId;
+        this->selectedId = selectedId;
         InitializeComponent();
     }
 
@@ -29,7 +29,7 @@ protected:
 
 private:
     SqlConnection^ sqlConn;
-    int selectedPatientId;
+    int selectedId;
     System::Windows::Forms::DateTimePicker^ visitDateTimePicker;
     System::Windows::Forms::Button^ visitAddButton;
     System::Windows::Forms::CheckBox^ paidCheckBox;

@@ -437,7 +437,7 @@ namespace OfficeManagementSystem {
 			this->Controls->Add(this->patientNameLabel);
 			this->Controls->Add(this->userPanelLabel);
 			this->Name = L"MyForm";
-			this->Text = L"Panel Pacjenta";
+			this->Text = L"Patient Manager";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
@@ -455,13 +455,15 @@ namespace OfficeManagementSystem {
 		int id;
 		int id_v;
 		int id_d;
-		int selectedPatientId;
 		int selectedRowIndex;
+		String^ treatment;
+		String^ description;
+		String^ prescription;
 
 		// Main function to show data in Grid view
 		void showdata() {
 			String^ connString = "Data Source=LAPTOP_TOMMY\\SQLEXPRESS;Initial Catalog=users;Integrated Security=True;Encrypt=False";
-			sqlConn = gcnew SqlConnection(connString); // Inicjalizacja sqlConn
+			sqlConn = gcnew SqlConnection(connString); 
 			sqlConn->Open();
 
 			String^ query = "SELECT ID_P,name, age, gender, phone, email FROM patient;";
@@ -480,11 +482,11 @@ namespace OfficeManagementSystem {
 		
 		// Second function to separate and chose detailed data about selected patient
 		void show_patient_data() {
-			// Pobierz tylko informacje o wizytach dla wybranego pacjenta
+			// Select only information for selected patient
 			String^ query = "SELECT * FROM visit WHERE patient_id=@patient_id;";
 			SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
 			command->CommandType = CommandType::Text;
-			command->Parameters->AddWithValue("@patient_id", selectedPatientId);
+			command->Parameters->AddWithValue("@patient_id", id);
 
 			sqlConn->Open();
 			SqlDataReader^ sdr = command->ExecuteReader();
@@ -500,7 +502,7 @@ namespace OfficeManagementSystem {
 
 		//Show detailed visit data
 		void show_visit_data() {
-			// Pobierz tylko informacje o wizytach dla wybranego pacjenta
+			// Select only data for selected visit for chosen earlier patient
 			String^ query = "SELECT * FROM detailed_visit WHERE visit_id=@visit_id;";
 			SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
 			command->CommandType = CommandType::Text;
@@ -530,9 +532,7 @@ namespace OfficeManagementSystem {
 			}
 			else {
 				String^ query = "INSERT INTO patient(name, age, gender, phone, email) VALUES (@name, @age, @gender, @phone, @email);";
-				//String^ query_patient_data = "INSERT INTO patient_data(p_id, gender) VALUES (@p_id, @gender);";
 				SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
-				//SqlCommand^ command2 = gcnew SqlCommand(query_patient_data, sqlConn);
 
 				command->CommandType = CommandType::Text;
 				command->Parameters->AddWithValue("@name", patientNameTextbox->Text);
@@ -541,17 +541,10 @@ namespace OfficeManagementSystem {
 				command->Parameters->AddWithValue("@phone", patientPhoneTextbox->Text);
 				command->Parameters->AddWithValue("@email", patientEmailTextbox->Text);
 
-				//command2->CommandType = CommandType::Text;
-
 				sqlConn->Open();
 
-				// Execute the first query and retrieve the last inserted ID directly
-				//int lastId = Convert::ToInt32(command->ExecuteScalar());
 				command->ExecuteScalar();
-				// Use the retrieved ID in the second query
-				//command2->Parameters->AddWithValue("@p_id", lastId);
-				//command2->ExecuteNonQuery();
-
+				
 				sqlConn->Close();
 				MessageBox::Show("Data has been inserted", "Data Update", MessageBoxButtons::OK);
 				showdata();
@@ -561,7 +554,6 @@ namespace OfficeManagementSystem {
 		// Data grid View 1 cell click
 		System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 			id = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value); // Update the id variable
-			selectedPatientId = Convert::ToInt32(dataGridView1->SelectedRows[0]->Cells[0]->Value);
 			patientNameTextbox->Text = dataGridView1->SelectedRows[0]->Cells[1]->Value->ToString();
 			patientAgeTextbox->Text = dataGridView1->SelectedRows[0]->Cells[2]->Value->ToString();
 			patientGendercomboBox->Text = dataGridView1->SelectedRows[0]->Cells[3]->Value->ToString();
@@ -581,6 +573,9 @@ namespace OfficeManagementSystem {
 		// Data grid View 3 cell click
 		System::Void dataGridView3_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 			id_d = Convert::ToInt32(dataGridView2->SelectedRows[0]->Cells[0]->Value);
+			treatment = dataGridView3->SelectedRows[0]->Cells[2]->Value->ToString();
+			description = dataGridView3->SelectedRows[0]->Cells[3]->Value->ToString();
+			prescription = dataGridView3->SelectedRows[0]->Cells[4]->Value->ToString();
 			show_visit_data();
 		}
 
@@ -607,23 +602,29 @@ namespace OfficeManagementSystem {
 	}
 }
 
-		// Remove button
+		// Remove method
+		void remove() {
+			String^ query = "DELETE FROM detailed_visit WHERE visit_id IN (SELECT v1.ID_V FROM patient p INNER JOIN visit v1 ON p.ID_P = v1.patient_id WHERE p.ID_P = @id);"
+				"DELETE FROM visit WHERE patient_id = @id;"
+				"DELETE FROM patient WHERE ID_P = @id;";
+			SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
+
+			command->CommandType = CommandType::Text;
+			command->Parameters->AddWithValue("@id", this->id);
+
+			sqlConn->Open();
+			command->ExecuteNonQuery();
+			sqlConn->Close();
+			MessageBox::Show("Data has been deleted", "Data Deleted", MessageBoxButtons::OK);
+		}
+
+		// Remove button event handler
 		System::Void removeButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (id > 0) {
-		String^ query = "DELETE FROM patient WHERE ID_P=@id;";
-		//String^ query_patient_data = "DELETE FROM patient_data WHERE p_id = @id";
-		SqlCommand^ command = gcnew SqlCommand(query, sqlConn);
-		//SqlCommand^ command2 = gcnew SqlCommand(query_patient_data, sqlConn);
-		command->CommandType = CommandType::Text;
-		command->Parameters->AddWithValue("@id", this->id);
-		//command2->CommandType = CommandType::Text;
-		//command2->Parameters->AddWithValue("@id", this->id);
-		sqlConn->Open();
-		command->ExecuteNonQuery();
-		//command2->ExecuteNonQuery();
-		sqlConn->Close();
-		MessageBox::Show("Data has been deleted", "Data Deleted", MessageBoxButtons::OK);
+		remove();
 		showdata();
+		show_patient_data();
+		show_visit_data();
 	}
 	else {
 		MessageBox::Show("Error", "Data update ERROR", MessageBoxButtons::OK);
@@ -648,7 +649,7 @@ namespace OfficeManagementSystem {
 		System::Void visitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			// Make sure that patient is selected
 			if (id > 0) {
-				VisitForm^ visitDialog = gcnew VisitForm(sqlConn, selectedPatientId, false);
+				VisitForm^ visitDialog = gcnew VisitForm(sqlConn, id, false);
 				visitDialog->ShowDialog();
 				show_patient_data();
 			}
@@ -660,7 +661,7 @@ namespace OfficeManagementSystem {
 		//Visit Details Add Button
 		System::Void detailedVisitAddButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (id_v > 0) {
-			DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm(sqlConn, id_v, false);
+			DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm(sqlConn, id_v, nullptr, nullptr, nullptr, false);
 			visitDialog->ShowDialog();
 			show_visit_data();
 		}
@@ -685,7 +686,7 @@ namespace OfficeManagementSystem {
 		// Button to edit visit details - event handler
 		System::Void detailsVisitEditButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (id_d > 0) {
-				DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm(sqlConn, id_d, true);
+				DetailedVisitForm^ visitDialog = gcnew DetailedVisitForm(sqlConn, id_d,treatment, description, prescription, true);
 				visitDialog->ShowDialog();
 				show_visit_data();
 			}

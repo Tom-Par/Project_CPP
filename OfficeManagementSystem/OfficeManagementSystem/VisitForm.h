@@ -92,7 +92,7 @@ private:
         this->Controls->Add(this->visitAddButton);
         this->Controls->Add(this->paidCheckBox);
         this->Controls->Add(this->visitDateTimePicker);
-        this->Name = L"VisitForm";
+        this->Name = L"Patient Visit";
         this->Text = L"Visit Form";
         this->ResumeLayout(false);
 

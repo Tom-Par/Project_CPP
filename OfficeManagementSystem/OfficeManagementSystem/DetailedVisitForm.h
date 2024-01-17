@@ -16,11 +16,14 @@ namespace OfficeManagementSystem {
 	public ref class DetailedVisitForm : public System::Windows::Forms::Form
 	{
 	public:
-		DetailedVisitForm(SqlConnection^ sqlConn,int selectedId, bool edit)
+		DetailedVisitForm(SqlConnection^ sqlConn, int selectedId, String^ treatment, String^ description, String^ prescription, bool edit)
 		{
 			this->sqlConn = sqlConn;
 			this->selectedId = selectedId;
 			this->edit = edit;
+			this->treatment = treatment;
+			this->description = description;
+			this->prescription = prescription;
 			InitializeComponent();
 		}
 
@@ -39,6 +42,9 @@ namespace OfficeManagementSystem {
 	SqlConnection^ sqlConn;
 	int selectedId;	
 	bool edit = false;
+	String^ treatment;
+	String^ description;
+	String^ prescription;
 	System::Windows::Forms::TextBox^ treatmentTextBox;
 	System::Windows::Forms::Label^ treatmentLabel;
 	System::Windows::Forms::Label^ descriptionLabel;
@@ -194,6 +200,9 @@ namespace OfficeManagementSystem {
 				this->detailedVisitFormAddButton->Size = System::Drawing::Size(150, 46);
 				this->detailedVisitFormAddButton->Text = L"Update";
 				this->detailedVisitFormAddButton->Click += gcnew System::EventHandler(this, &DetailedVisitForm::detailedVisitFormEditButton_Click);
+				treatmentTextBox->Text = treatment;
+				descriptionTextBox->Text = description;
+				prescriptionTextBox->Text = prescription;
 			}
 			// 
 			// DetailedVisitForm
@@ -209,7 +218,7 @@ namespace OfficeManagementSystem {
 			this->Controls->Add(this->descriptionTextBox);
 			this->Controls->Add(this->treatmentTextBox);
 			this->Name = L"DetailedVisitForm";
-			this->Text = L"DetailedVisitForm";
+			this->Text = L"Visit Description";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

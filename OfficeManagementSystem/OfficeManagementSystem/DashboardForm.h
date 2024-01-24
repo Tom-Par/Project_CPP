@@ -66,19 +66,7 @@ namespace OfficeManagementSystem {
 	private: System::Windows::Forms::Button^ visitEditButton;
 	private: System::Windows::Forms::Button^ detailsVisitEditButton;
 
-
-
-
-
-
-
-
-
-
-
-
 	protected:
-
 
 	private:
 		/// <summary>
@@ -448,8 +436,6 @@ namespace OfficeManagementSystem {
 		}
 #pragma endregion
 
-
-	
 	private:
 		SqlConnection^ sqlConn;
 		int id;

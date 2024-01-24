@@ -1,4 +1,4 @@
-# Desktop app for System Management in Hospitals
+# Desktop app for System Management in Medical Office
 A user-friendly application providing whole customisable system with staf, patient information. 
 
 Whole equipment and room layout.
